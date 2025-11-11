@@ -97,7 +97,7 @@ const Nav = ({ active, onToggleTheme, theme }) => {
   return (
     <header className="fixed top-0 inset-x-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-900/60 bg-white/70 dark:bg-gray-900/70 border-b border-black/5 dark:border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href="#hero" className="font-semibold tracking-tight text-gray-900 dark:text-white text-lg">Alankar Jamle</a>
+        <a href="#hero" className="font-extrabold tracking-tight text-gray-900 dark:text-white text-lg">Alankar Jamle</a>
         <nav className="hidden md:flex items-center gap-6">
           {links.map((l) => (
             <a
@@ -112,7 +112,7 @@ const Nav = ({ active, onToggleTheme, theme }) => {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <a href="https://github.com/" aria-label="GitHub" className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition">
+          <a href="https://github.com/" aria-label="GitHub" className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg.white/10 transition">
             <Github className="h-5 w-5 text-gray-700 dark:text-gray-300" />
           </a>
           <a href="https://www.linkedin.com/" aria-label="LinkedIn" className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition">
@@ -141,7 +141,7 @@ const Nav = ({ active, onToggleTheme, theme }) => {
 const QuoteCard = ({ text, author }) => (
   <figure className="relative p-6 card">
     <Quote className="absolute -top-3 -left-3 h-6 w-6 text-teal-400" />
-    <blockquote className="text-gray-700 dark:text-gray-200">{text}</blockquote>
+    <blockquote className="text-gray-700 dark:text-gray-200 font-semibold">{text}</blockquote>
     <figcaption className="mt-3 text-sm text-gray-500 dark:text-gray-400">— {author}</figcaption>
   </figure>
 )
@@ -150,7 +150,7 @@ const Badge = ({ icon: Icon, label }) => (
   <div className="group relative flex items-center gap-2 px-3 py-2 rounded-lg border border-black/5 dark:border-white/10 bg-white/60 dark:bg-white/5 shadow-sm transition-transform duration-300 hover:-translate-y-0.5">
     <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 ring-2 ring-teal-400/30 blur-[2px]" />
     <Icon className="h-4 w-4 text-gray-700 dark:text-gray-300" />
-    <span className="text-sm font-medium text-gray-800 dark:text-gray-200">{label}</span>
+    <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">{label}</span>
   </div>
 )
 
@@ -167,11 +167,24 @@ const Section = ({ id, title, children }) => (
   </section>
 )
 
+function SplineGrid() {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden ring-1 ring-black/5 dark:ring-white/10 bg-gradient-to-br from-gray-100 to-white dark:from-gray-800 dark:to-gray-900">
+        <Spline scene="https://prod.spline.design/VJLoxp84lCdVfdZu/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+      </div>
+      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden ring-1 ring-black/5 dark:ring-white/10 bg-gradient-to-br from-gray-100 to-white dark:from-gray-800 dark:to-gray-900">
+        <Spline scene="https://prod.spline.design/9G3T8m1N3oQjBP2Z/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+      </div>
+    </div>
+  )
+}
+
 export default function App() {
   const [theme, setTheme] = useTheme()
   const typed = useTypingCycle(phrases, { typeSpeed: 40, deleteSpeed: 24, holdTime: 1400 })
   const [active, setActive] = useState('hero')
-  const sections = useMemo(() => ['hero', 'about', 'stack', 'skills', 'experience', 'certs', 'contact'], [])
+  const sections = useMemo(() => ['hero', 'about', 'stack', 'skills', 'experience', 'certs', 'gallery', 'contact'], [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -204,11 +217,11 @@ export default function App() {
             <span className="eyebrow">
               <span className="h-2 w-2 rounded-full bg-teal-500 animate-pulse" /> Open to backend & cloud roles
             </span>
-            <h1 className="text-3xl sm:text-5xl font-bold leading-tight">
+            <h1 className="text-4xl sm:text-6xl font-extrabold leading-tight">
               Hi, I’m Alankar Jamle
-              <span className="block text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(90deg, #00C8A0, #FF7058)' }}>Software Engineer</span>
+              <span className="block text-gray-900 dark:text-white">Software Engineer</span>
             </h1>
-            <p className="text-base sm:text-lg text-gray-700/90 dark:text-gray-300">
+            <p className="text-lg sm:text-xl text-gray-800 dark:text-gray-200 font-semibold">
               {typed}
               <span className="border-r-2 border-gray-800 dark:border-gray-100 ml-1 animate-pulse" />
             </p>
@@ -243,10 +256,10 @@ export default function App() {
             </div>
           </div>
           <div className="space-y-4 text-gray-700 dark:text-gray-300">
-            <p>
+            <p className="font-semibold">
               Backend-focused engineer with 2.5 years of experience designing robust APIs, crafting microservices, and deploying to cloud environments.
             </p>
-            <p>
+            <p className="font-medium text-gray-800 dark:text-gray-200">
               I enjoy transforming complex requirements into elegant systems with thoughtful abstractions, observability, and automation.
             </p>
             <div className="p-4 soft rounded-lg">
@@ -260,7 +273,7 @@ export default function App() {
 
       {/* Tech Stack */}
       <Section id="stack" title="Tech Stack">
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3 justify-center">
           <Badge icon={Code2} label="Java" />
           <Badge icon={Leaf} label="Spring Boot" />
           <Badge icon={Database} label="PostgreSQL" />
@@ -284,7 +297,7 @@ export default function App() {
             'Containerization & orchestration',
           ].map((s) => (
             <div key={s} className="p-4 soft rounded-lg hover:border-teal-300 transition">
-              <span className="text-sm text-gray-800 dark:text-gray-200">{s}</span>
+              <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">{s}</span>
             </div>
           ))}
         </div>
@@ -296,18 +309,24 @@ export default function App() {
           <div className="relative p-6 card">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h3 className="text-lg font-semibold">Software Engineer</h3>
+                <h3 className="text-lg font-extrabold">Software Engineer</h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400">Backend · Cloud · APIs</p>
               </div>
               <span className="chip">2022 — Present</span>
             </div>
-            <ul className="mt-4 list-disc pl-5 space-y-2 text-sm text-gray-700 dark:text-gray-300">
+            <ul className="mt-4 list-disc pl-5 space-y-2 text-sm text-gray-800 dark:text-gray-200 font-medium">
               <li>Designed and shipped scalable REST services with Java + Spring Boot.</li>
               <li>Implemented CI/CD with Jenkins and Git, reducing release friction.</li>
               <li>Deployed containerized workloads to AWS with robust monitoring.</li>
             </ul>
           </div>
         </div>
+      </Section>
+
+      {/* 3D Gallery */}
+      <Section id="gallery" title="Interactive Gallery">
+        <p className="text-center text-sm text-gray-600 dark:text-gray-400 mb-6">Additional interactive 3D elements, matching the hero’s style.</p>
+        <SplineGrid />
       </Section>
 
       {/* Certifications */}
@@ -319,33 +338,18 @@ export default function App() {
             'Docker Essentials & Kubernetes Basics',
           ].map((c) => (
             <div key={c} className="p-4 card">
-              <span className="text-sm">{c}</span>
+              <span className="text-sm font-semibold">{c}</span>
             </div>
           ))}
         </div>
       </Section>
 
-      {/* Projects (commented out for later enable) */}
-      {false && (
-        <Section id="projects" title="Projects">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {/* project cards go here */}
-          </div>
-        </Section>
-      )}
-      {/* 
-<section id="projects">
-  <h2>Projects</h2>
-  <!-- project cards go here -->
-</section>
-*/}
-
       {/* Contact */}
       <Section id="contact" title="Contact">
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-2">
-            <h3 className="text-xl font-semibold">Let’s build something reliable.</h3>
-            <p className="text-gray-600 dark:text-gray-300">Have an opportunity or idea? I’m all ears.</p>
+            <h3 className="text-xl font-extrabold">Let’s build something reliable.</h3>
+            <p className="text-gray-700 dark:text-gray-300 font-medium">Have an opportunity or idea? I’m all ears.</p>
             <div className="flex gap-3 pt-2">
               <a href="https://github.com/" className="btn bg-gray-900 text-white dark:bg-white dark:text-gray-900 hover:opacity-90">
                 <Github className="h-4 w-4" /> GitHub
@@ -388,16 +392,16 @@ function ContactForm() {
     <form onSubmit={onSubmit} className="p-6 card space-y-4">
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm mb-1 text-gray-700 dark:text-gray-300" htmlFor="name">Name</label>
+          <label className="block text-sm mb-1 text-gray-700 dark:text-gray-300 font-semibold" htmlFor="name">Name</label>
           <input id="name" required placeholder="Your name" className="w-full rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-gray-900 px-3 py-2 outline-none focus:ring-2 focus:ring-teal-400 transition" />
         </div>
         <div>
-          <label className="block text-sm mb-1 text-gray-700 dark:text-gray-300" htmlFor="email">Email</label>
+          <label className="block text-sm mb-1 text-gray-700 dark:text-gray-300 font-semibold" htmlFor="email">Email</label>
           <input id="email" type="email" required placeholder="you@example.com" className="w-full rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-gray-900 px-3 py-2 outline-none focus:ring-2 focus:ring-teal-400 transition" />
         </div>
       </div>
       <div>
-        <label className="block text-sm mb-1 text-gray-700 dark:text-gray-300" htmlFor="message">Message</label>
+        <label className="block text-sm mb-1 text-gray-700 dark:text-gray-300 font-semibold" htmlFor="message">Message</label>
         <textarea id="message" required rows={5} placeholder="Tell me about your project or role" className="w-full rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-gray-900 px-3 py-2 outline-none focus:ring-2 focus:ring-teal-400 transition" />
       </div>
       <button type="submit" disabled={status !== 'idle'} className="btn-primary disabled:opacity-60">
