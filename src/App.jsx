@@ -103,8 +103,8 @@ const Nav = ({ active, onToggleTheme, theme }) => {
             <a
               key={l.id}
               href={`#${l.id}`}
-              className={`text-sm font-medium transition-colors duration-300 hover:text-teal-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 dark:hover:text-teal-400 ${
-                active === l.id ? 'text-teal-600 dark:text-teal-300' : 'text-gray-700 dark:text-gray-300'
+              className={`nav-link ${
+                active === l.id ? 'nav-active' : ''
               }`}
             >
               {l.label}
@@ -139,7 +139,7 @@ const Nav = ({ active, onToggleTheme, theme }) => {
 }
 
 const QuoteCard = ({ text, author }) => (
-  <figure className="relative p-6 rounded-xl bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10 shadow-sm">
+  <figure className="relative p-6 card">
     <Quote className="absolute -top-3 -left-3 h-6 w-6 text-teal-400" />
     <blockquote className="text-gray-700 dark:text-gray-200">{text}</blockquote>
     <figcaption className="mt-3 text-sm text-gray-500 dark:text-gray-400">— {author}</figcaption>
@@ -158,7 +158,7 @@ const Section = ({ id, title, children }) => (
   <section id={id} className="scroll-mt-24 py-20">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {title && (
-        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight mb-8 text-gray-900 dark:text-white">
+        <h2 className="title">
           {title}
         </h2>
       )}
@@ -201,7 +201,7 @@ export default function App() {
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
           <div className="space-y-6">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-teal-50 text-teal-700 dark:bg-white/5 dark:text-teal-300 border border-teal-100 dark:border-white/10">
+            <span className="eyebrow">
               <span className="h-2 w-2 rounded-full bg-teal-500 animate-pulse" /> Open to backend & cloud roles
             </span>
             <h1 className="text-3xl sm:text-5xl font-bold leading-tight">
@@ -213,10 +213,10 @@ export default function App() {
               <span className="border-r-2 border-gray-800 dark:border-gray-100 ml-1 animate-pulse" />
             </p>
             <div className="flex flex-wrap items-center gap-3">
-              <a href="#contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500 text-white font-medium shadow hover:shadow-md transition">
+              <a href="#contact" className="btn-primary">
                 <Mail className="h-4 w-4" /> Contact Me
               </a>
-              <a href="#" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 text-gray-900 dark:text-gray-100 hover:border-teal-300 hover:text-teal-600 dark:hover:text-teal-300 transition">
+              <a href="#" className="btn-ghost">
                 <Download className="h-4 w-4" /> Download Resume
               </a>
             </div>
@@ -249,7 +249,7 @@ export default function App() {
             <p>
               I enjoy transforming complex requirements into elegant systems with thoughtful abstractions, observability, and automation.
             </p>
-            <div className="p-4 rounded-lg bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10">
+            <div className="p-4 soft rounded-lg">
               <p className="text-sm italic">
                 "I believe software should be like a well-written sentence — clear, purposeful, and readable. I aim to build systems that don’t just work but evolve gracefully."
               </p>
@@ -283,7 +283,7 @@ export default function App() {
             'Observability (logs, metrics, traces)',
             'Containerization & orchestration',
           ].map((s) => (
-            <div key={s} className="p-4 rounded-lg bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10 hover:border-teal-300 transition">
+            <div key={s} className="p-4 soft rounded-lg hover:border-teal-300 transition">
               <span className="text-sm text-gray-800 dark:text-gray-200">{s}</span>
             </div>
           ))}
@@ -293,13 +293,13 @@ export default function App() {
       {/* Experience */}
       <Section id="experience" title="Experience">
         <div className="space-y-6">
-          <div className="relative p-6 rounded-xl bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10">
+          <div className="relative p-6 card">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <h3 className="text-lg font-semibold">Software Engineer</h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400">Backend · Cloud · APIs</p>
               </div>
-              <span className="text-xs px-2 py-1 rounded-full bg-teal-50 text-teal-700 dark:bg-white/5 dark:text-teal-300 border border-teal-100 dark:border-white/10">2022 — Present</span>
+              <span className="chip">2022 — Present</span>
             </div>
             <ul className="mt-4 list-disc pl-5 space-y-2 text-sm text-gray-700 dark:text-gray-300">
               <li>Designed and shipped scalable REST services with Java + Spring Boot.</li>
@@ -318,7 +318,7 @@ export default function App() {
             'Oracle Certified Java Programmer (OCJP)',
             'Docker Essentials & Kubernetes Basics',
           ].map((c) => (
-            <div key={c} className="p-4 rounded-lg bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10">
+            <div key={c} className="p-4 card">
               <span className="text-sm">{c}</span>
             </div>
           ))}
@@ -347,10 +347,10 @@ export default function App() {
             <h3 className="text-xl font-semibold">Let’s build something reliable.</h3>
             <p className="text-gray-600 dark:text-gray-300">Have an opportunity or idea? I’m all ears.</p>
             <div className="flex gap-3 pt-2">
-              <a href="https://github.com/" className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-900 text-white dark:bg-white dark:text-gray-900 hover:opacity-90 transition">
+              <a href="https://github.com/" className="btn bg-gray-900 text-white dark:bg-white dark:text-gray-900 hover:opacity-90">
                 <Github className="h-4 w-4" /> GitHub
               </a>
-              <a href="https://www.linkedin.com/" className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-black/10 dark:border-white/10 hover:border-teal-300 transition">
+              <a href="https://www.linkedin.com/" className="btn-ghost">
                 <Linkedin className="h-4 w-4" /> LinkedIn
               </a>
             </div>
@@ -385,7 +385,7 @@ function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="p-6 rounded-xl bg-white/60 dark:bg-white/5 border border-black/5 dark:border-white/10 space-y-4">
+    <form onSubmit={onSubmit} className="p-6 card space-y-4">
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm mb-1 text-gray-700 dark:text-gray-300" htmlFor="name">Name</label>
@@ -400,7 +400,7 @@ function ContactForm() {
         <label className="block text-sm mb-1 text-gray-700 dark:text-gray-300" htmlFor="message">Message</label>
         <textarea id="message" required rows={5} placeholder="Tell me about your project or role" className="w-full rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-gray-900 px-3 py-2 outline-none focus:ring-2 focus:ring-teal-400 transition" />
       </div>
-      <button type="submit" disabled={status !== 'idle'} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-500 text-white font-medium shadow hover:shadow-md transition disabled:opacity-60">
+      <button type="submit" disabled={status !== 'idle'} className="btn-primary disabled:opacity-60">
         {status === 'sending' ? 'Sending…' : status === 'sent' ? 'Sent ✓' : 'Send Message'}
       </button>
     </form>
